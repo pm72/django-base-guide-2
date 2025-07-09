@@ -214,7 +214,7 @@ class Cart:
     კალათის გასუფთავება
     '''
 
-    del self.session[settings.CART_SESSION_ID] = {}  # კალათის გასუფთავება
+    del self.session[settings.CART_SESSION_ID]  # კალათის გასუფთავება
     self.save()  # სესიის შენახვა
     
     '''მაგალითი:
