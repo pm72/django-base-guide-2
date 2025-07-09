@@ -19,4 +19,16 @@ def product_list(request, category_slug=None):
       'category': category,
     }
 
-    return render(request, 'main/product_list.html', context)
+    return render(request, 'main/products/list.html', context)
+
+
+def product_detail(request, pk, slug):
+  product = get_object_or_404(Product, pk=pk, slug=slug, available=True)
+  related_products = Product.objects.filter(category=product.category, available=True).exclude(pk=product.pk)[:4]
+
+  context = {
+    'product': product,
+    'related_products': related_products,
+  }
+
+  return render(request, 'main/products/detail.html', context)
