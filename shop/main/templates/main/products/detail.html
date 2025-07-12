@@ -21,9 +21,12 @@
           <p>{{ product.description | linebreaks }}</p>
         </div>
         <div class="mt-4">
-          <input class="form-control" type="number" name="" >
-          <input class="form-control" type="hidden" name="" >
-          <button type="submit" class="btn btn-primary btn-lg">კალათაში დამატება</button>
+          <form action="{% url 'cart:cart-add' product.id %}" method="post">
+            {% csrf_token %}
+
+            {{ cart_product_form }}
+            <button type="submit" class="btn btn-primary btn-lg">კალათაში დამატება</button>
+          </form>
         </div>
       </div>
     </div>

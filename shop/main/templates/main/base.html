@@ -31,10 +31,16 @@
         </ul>
 
         <div class="d-flex">
-          <a href="#" class="btn btn-outline-light position-relative me-3">
+          <a href="{% url 'cart:cart-detail' %}" class="btn btn-outline-light position-relative me-3">
             <i class="bi bi-cart"></i> cart
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              0
+              {% with total_items=cart|length %}
+                {% if total_items > 0 %}
+                  {{ total_items }}
+                {% else %}
+                  0
+                {% endif %}
+              {% endwith %}
             </span>
           </a>
         </div>

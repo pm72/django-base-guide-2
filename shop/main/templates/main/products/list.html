@@ -12,10 +12,10 @@
         სორტირება
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="?sort=name">დასახელების მიხედვით (ა-ჰ)</a></li>
-        <li><a class="dropdown-item" href="?sort=-name">დასახელების მიხედვით (ჰ-ა)</a></li>
-        <li><a class="dropdown-item" href="?sort=price">ფასის მიხედვით (იაფი)</a></li>
-        <li><a class="dropdown-item" href="?sort=-price">ფასის მიხედვით (ძვირი)</a></li>
+        <li><a class="dropdown-item {% if current_sort == 'name' %}active{% endif %}" href="?sort=name">დასახელების მიხედვით (ა-ჰ)</a></li>
+        <li><a class="dropdown-item {% if current_sort == '-name' %}active{% endif %}" href="?sort=-name">დასახელების მიხედვით (ჰ-ა)</a></li>
+        <li><a class="dropdown-item {% if current_sort == 'price' %}active{% endif %}" href="?sort=price">ფასის მიხედვით (იაფი)</a></li>
+        <li><a class="dropdown-item {% if current_sort == '-price' %}active{% endif %}" href="?sort=-price">ფასის მიხედვით (ძვირი)</a></li>
       </ul>
     </div>
   </div>
@@ -34,7 +34,7 @@
               <h5 class="card-title">
                 <a href="{{ product.get_absolute_url }}" class="text-decoration-none">{{ product }}</a>
               </h5>
-              <p class="card-text mt-auto">1000 ₾</p>
+              <p class="card-text mt-auto">{{ product.price }} ₾</p>
               <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary mt-2">დაწვრილებით</a>
             </div>
           </div>

@@ -105,7 +105,7 @@ class Cart:
     return sum(item['quantity'] for item in self.cart.values())
   
 
-  def total_price(self):
+  def get_total_price(self):
     '''
     კალათში არსებული პროდუქტების ჯამური ფასი.
     '''

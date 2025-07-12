@@ -1,0 +1,66 @@
+{% extends "main/base.html" %}
+
+{% block title %} კალათა {% endblock %}
+
+{% block content %}
+  <h1>თქვენი კალათა</h1><br>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>პროდუქტი</th>
+          <th>რაოდენობა</th>
+          <th>წაშლა</th>
+          <th>ერთეულის ფასი</th>
+          <th>მთლიანი ღირებულება</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+          <tr>
+            <td>{{ item.product }}</td>
+            <td>
+              <form action="{% url 'cart:cart-add' item.product.id %}" method="post">
+                {% csrf_token %}
+
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.override }}
+                <button type="submit" class="btn btn-sm btn-outline-secondary">განახლება</button>
+              </form>
+            </td>
+            <td>
+              <form action="{% url 'cart:cart-remove' item.product.id %}" method="post">
+                {% csrf_token %}
+
+                <button type="submit" class="btn btn-sm btn-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            </td>
+            <td>{{ item.price }} ₾</td>
+            <td>{{ item.total_price }} ₾</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5">თქვენი კალათა ცარიელია</td>
+          </tr>
+        {% endfor %}
+
+        {% if cart.get_total_price %}
+          <tr class="table-active">
+            <td colspan="4">ჯამი:</td>
+            <td>{{ cart.get_total_price }} ₾</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <a href="{% url 'main:product-list'%}" class="btn btn-outline-secondary">
+      შესყიდვების გაგრძელება
+    </a>
+    <a href="#" class="btn btn-primary">შეკვეთა</a>
+  </div>
+{% endblock %}
